@@ -382,7 +382,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 308959297}
   m_LocalRotation: {x: -0, y: -0, z: -0.18050043, w: 0.9835749}
-  m_LocalPosition: {x: -2.69, y: -4.41, z: 0}
+  m_LocalPosition: {x: -2.69, y: -4.41, z: -2}
   m_LocalScale: {x: 6.1956277, y: 8.9403, z: 2.6295}
   m_Children: []
   m_Father: {fileID: 0}
@@ -501,7 +501,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 427227063}
   m_LocalRotation: {x: -0, y: -0, z: -0.29511404, w: 0.95546204}
-  m_LocalPosition: {x: -3.821499, y: -4.071369, z: 0}
+  m_LocalPosition: {x: -3.821499, y: -4.071369, z: -1.5}
   m_LocalScale: {x: 6.1956277, y: 8.9403, z: 2.6295}
   m_Children: []
   m_Father: {fileID: 0}
@@ -731,8 +731,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: AUTEUR
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 614a925e29d1149d2a73b0b48da1e763, type: 2}
+  m_sharedMaterial: {fileID: -8816903732749787566, guid: 614a925e29d1149d2a73b0b48da1e763, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -756,8 +756,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 14
-  m_fontSizeBase: 14
+  m_fontSize: 20
+  m_fontSizeBase: 20
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -882,7 +882,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 721302445}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -4.5, z: 0}
+  m_LocalPosition: {x: 0, y: -4.5, z: -1}
   m_LocalScale: {x: 22, y: 9, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1259,8 +1259,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: JOUER
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 614a925e29d1149d2a73b0b48da1e763, type: 2}
+  m_sharedMaterial: {fileID: -8816903732749787566, guid: 614a925e29d1149d2a73b0b48da1e763, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1284,8 +1284,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 34
+  m_fontSizeBase: 34
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
