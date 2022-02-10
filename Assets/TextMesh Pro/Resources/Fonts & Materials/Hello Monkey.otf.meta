@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 4fe1b10ff49b543638b67fabcc0fce92
+guid: 2a8c36e7ec585424ca06577bc5709a19
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
@@ -10,7 +10,8 @@ TrueTypeFontImporter:
   includeFontData: 1
   fontNames:
   - Hello Monkey
-  fallbackFontReferences: []
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 4fe1b10ff49b543638b67fabcc0fce92, type: 3}
   customCharacters: 
   fontRenderingMode: 0
   ascentCalculationMode: 1

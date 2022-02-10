@@ -15,4 +15,8 @@ public class GameManager : MonoBehaviour
     {
         
     }
+
+    public void SelectQuestionQuantity(int quantity) {
+        Console.write("Quantity : " + quantity);
+    }
 }
