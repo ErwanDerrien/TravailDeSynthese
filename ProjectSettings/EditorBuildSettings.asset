@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/QuizSelect.unity
     guid: bb725f6fa539448be83fbe0974c7686b
+  - enabled: 1
+    path: Assets/Scenes/QuestionsPage.unity
+    guid: 42ec731cc3d794556b545c5c72776316
   m_configObjects: {}

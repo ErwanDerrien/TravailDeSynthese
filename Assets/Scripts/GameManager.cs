@@ -6,6 +6,7 @@ using TMPro;
 using UnityEngine.UI;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
+using UnityEngine.UnityInitializer;
 
 public class GameManager : MonoBehaviour
 {
@@ -16,19 +17,18 @@ public class GameManager : MonoBehaviour
 
     int questionQuantity;
 
-    // Start is called before the first frame update
     void Start()
     {
         Debug.Log("Quantity : " + questionQuantity);
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+
     }
 
-    public void SelectQuestionQuantity(int quantity) {
+    public void SelectQuestionQuantity(int quantity)
+    {
         Debug.Log("Quantity : " + quantity);
         questionQuantity = quantity;
         SceneManager.LoadScene("QuestionsPage");
