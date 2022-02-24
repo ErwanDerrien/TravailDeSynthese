@@ -17,11 +17,50 @@ namespace Numitor.SDK.DAO.QuestionDao
     {
         public QuestionHttpDao(string baseUrl) : base(baseUrl) { }
 
+        public async Task<Question> Get() {
+            return await Get(null);
+        }
+
+        public override async Task<Question> Get(string id)
+        {
+            string url = composeUrl(baseUrl + "next", "get");
+
+            try
+            {
+                using var request = UnityWebRequest.Get(url);
+
+                var operation = request.SendWebRequest();
+
+                while (!operation.isDone)
+                {
+                    await Task.Yield();
+                }
+
+                if (request.result != UnityWebRequest.Result.Success)
+                {
+                    Debug.LogError($"Failed: {request.error}");
+                }
+                else if (request.responseCode == 200)
+                {
+                    var jsonPayload = request.downloadHandler.text;
+
+                    return JsonUtility.FromJson<Question>(jsonPayload);
+                }
+            }
+            catch (System.Exception ex)
+            {
+                Debug.LogError($"{nameof(Get)} failed with message: {ex.Message}");
+            }
+
+            return default;
+        }
+
         public override async Task<string> Create(Question entity)
         {
             string url = composeUrl(baseUrl, "post");
 
-            try {
+            try
+            {
                 string payload = JsonUtility.ToJson(entity);
 
                 UTF8Encoding encoder = new UTF8Encoding();
@@ -36,14 +75,16 @@ namespace Numitor.SDK.DAO.QuestionDao
 
                 var operation = request.SendWebRequest();
 
-                while (!operation.isDone) {
+                while (!operation.isDone)
+                {
                     await Task.Yield();
                 }
 
-                if (request.result != UnityWebRequest.Result.Success) {
+                if (request.result != UnityWebRequest.Result.Success)
+                {
                     Debug.LogError($"Failed: {request.error}");
                 }
-                else if (request.responseCode == 201) // OK
+                else if (request.responseCode == 201)
                 {
                     string jsonPayload = request.downloadHandler.text;
 
@@ -53,7 +94,8 @@ namespace Numitor.SDK.DAO.QuestionDao
                 }
 
             }
-            catch (Exception ex) {
+            catch (Exception ex)
+            {
                 Debug.LogError($"A failed with message: {ex.Message}");
             }
 

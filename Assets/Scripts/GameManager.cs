@@ -7,6 +7,9 @@ using UnityEngine.UI;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
+using Numitor.SDK.Model.QuestionModel;
+using Numitor.SDK.DAO.QuestionDao;
+
 public class GameManager : MonoBehaviour
 {
 
@@ -18,21 +21,30 @@ public class GameManager : MonoBehaviour
     [SerializeField] Button ButtonAnswer2;
     [SerializeField] Button ButtonAnswer3;
     [SerializeField] Button ButtonAnswer4;
-    [SerializeField] Text AnswerPlaceholder1;
-    [SerializeField] Text AnswerPlaceholder2;
-    [SerializeField] Text AnswerPlaceholder3;
-    [SerializeField] Text AnswerPlaceholder4;
+    [SerializeField] TextMeshProUGUI AnswerPlaceholder1;
+    [SerializeField] TextMeshProUGUI AnswerPlaceholder2;
+    [SerializeField] TextMeshProUGUI AnswerPlaceholder3;
+    [SerializeField] TextMeshProUGUI AnswerPlaceholder4;
 
     int questionQuantity;
+
+    string baseUrl = "https://uhx1g7zs22.execute-api.ca-central-1.amazonaws.com/default/numitor/";
+    QuestionHttpDao questionHttpDao;
+
+    Question question;
 
     void Start()
     {
         Debug.Log("Quantity : " + questionQuantity);
+        questionHttpDao = new QuestionHttpDao(baseUrl + "/question");
+        
+        question = questionHttpDao.Get().Result;
+        Debug.Log("question" + question);
     }
 
     void Update()
     {
-
+        
     }
 
     public void SelectQuestionQuantity(int quantity)

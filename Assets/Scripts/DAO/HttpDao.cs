@@ -68,7 +68,7 @@ namespace Numitor.SDK.DAO
         }
 
 
-        public virtual async Task<T> Get()
+        public virtual async Task<T> Get(string id)
         {
             string url = composeUrl(baseUrl, "get");
 

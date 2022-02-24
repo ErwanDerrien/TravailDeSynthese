@@ -17,6 +17,41 @@ namespace Numitor.SDK.DAO.AnswerDao
     {
         public AnswerHttpDao(string baseUrl) : base(baseUrl) { }
 
+       
+       public override async Task<Answer> Get(string id)
+        {
+            string url = composeUrl(baseUrl + id, "get");
+
+            try
+            {
+                using var request = UnityWebRequest.Get(url);
+
+                var operation = request.SendWebRequest();
+
+                while (!operation.isDone)
+                {
+                    await Task.Yield();
+                }
+
+                if (request.result != UnityWebRequest.Result.Success)
+                {
+                    Debug.LogError($"Failed: {request.error}");
+                }
+                else if (request.responseCode == 200)
+                {
+                    var jsonPayload = request.downloadHandler.text;
+
+                    return JsonUtility.FromJson<Answer>(jsonPayload);
+                }
+            }
+            catch (System.Exception ex)
+            {
+                Debug.LogError($"{nameof(Get)} failed with message: {ex.Message}");
+            }
+
+            return default;
+        }
+
         public override async Task<string> Create(Answer entity)
         {
             string url = composeUrl(baseUrl, "post");
