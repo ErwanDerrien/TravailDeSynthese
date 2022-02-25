@@ -1,0 +1,57 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8719353099822001157
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8719353099822001159}
+  - component: {fileID: 8719353099822001158}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8719353099822001159
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8719353099822001157}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.5970169, y: 0.25730473, z: -1.9862442}
+  m_LocalScale: {x: 0.9211747, y: 0.9211747, z: 0.9211747}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8719353099822001158
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8719353099822001157}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0644d81c5d05b489d82d4801fd546019, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Button5: {fileID: 8948438348209062869, guid: 90d1b26aee7754949997e8efbee29a5c, type: 3}
+  Button10: {fileID: 1696844757111929443, guid: b24b4839386ab4a1aa42a3781b2949f5, type: 3}
+  Button15: {fileID: 2187371856043926559, guid: 13972401558c9456dbea9b829ebb2f80, type: 3}
+  ButtonAnswer0: {fileID: 4016776075301236187, guid: c118ebbcd0d774c108ab732c9644eace, type: 3}
+  ButtonAnswer1: {fileID: 100096174777144374, guid: 09ae125bb0bea43d8a0396d08538d92f, type: 3}
+  ButtonAnswer2: {fileID: 8644897578340259076, guid: 25caca887e41547f0a102b6f846f2e2c, type: 3}
+  ButtonAnswer3: {fileID: 3894959050154134764, guid: c395ececac0274726b592c1c401d14f8, type: 3}
+  QuestionPlaceholder: {fileID: 6857610172317478609, guid: 729676315ce0044858d93e4819658a14, type: 3}
+  AnswerPlaceholder0: {fileID: 3035158585099074649, guid: c9640d0a522b04908863f8f10411e982, type: 3}
+  AnswerPlaceholder1: {fileID: 6964979551705194189, guid: 9f666b37c316a42e3ad6d87732edc978, type: 3}
+  AnswerPlaceholder2: {fileID: 6384772994337958317, guid: 7e1f094d6a4e747f9afbb698a559cfac, type: 3}
+  AnswerPlaceholder3: {fileID: 7480526126078971299, guid: 0353134853375462c9c154c72f7d8617, type: 3}

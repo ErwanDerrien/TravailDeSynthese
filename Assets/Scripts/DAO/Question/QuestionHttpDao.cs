@@ -23,7 +23,7 @@ namespace Numitor.SDK.DAO.QuestionDao
 
         public override async Task<Question> Get(string id)
         {
-            string url = composeUrl(baseUrl + "next", "get");
+            string url = baseUrl + "/next";
 
             try
             {
