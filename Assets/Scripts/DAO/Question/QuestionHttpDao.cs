@@ -17,7 +17,8 @@ namespace Numitor.SDK.DAO.QuestionDao
     {
         public QuestionHttpDao(string baseUrl) : base(baseUrl) { }
 
-        public async Task<Question> Get() {
+        public async Task<Question> Get()
+        {
             return await Get(null);
         }
 

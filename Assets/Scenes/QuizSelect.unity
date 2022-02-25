@@ -1095,7 +1095,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1692486572
 GameObject:
@@ -1359,6 +1359,17 @@ Transform:
   m_Father: {fileID: 1437423408}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2056956298 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7837487333792680281, guid: 2a2b9dbb0d6174cd48f40efc6b189d27, type: 3}
+  m_PrefabInstance: {fileID: 1162326624}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0644d81c5d05b489d82d4801fd546019, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2065235910
 GameObject:
   m_ObjectHideFlags: 0
@@ -1617,7 +1628,7 @@ PrefabInstance:
     - target: {fileID: 1696844757111929443, guid: b24b4839386ab4a1aa42a3781b2949f5, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 8719353099822001158, guid: 2a2b9dbb0d6174cd48f40efc6b189d27, type: 3}
+      objectReference: {fileID: 2056956298}
     - target: {fileID: 1696844757111929443, guid: b24b4839386ab4a1aa42a3781b2949f5, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: SelectQuestionQuantity
@@ -1726,7 +1737,7 @@ PrefabInstance:
     - target: {fileID: 2187371856043926559, guid: 13972401558c9456dbea9b829ebb2f80, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 8719353099822001158, guid: 2a2b9dbb0d6174cd48f40efc6b189d27, type: 3}
+      objectReference: {fileID: 2056956298}
     - target: {fileID: 2187371856043926559, guid: 13972401558c9456dbea9b829ebb2f80, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: SelectQuestionQuantity
@@ -1743,7 +1754,7 @@ PrefabInstance:
     - target: {fileID: 8948438348209062869, guid: 90d1b26aee7754949997e8efbee29a5c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 8719353099822001158, guid: 2a2b9dbb0d6174cd48f40efc6b189d27, type: 3}
+      objectReference: {fileID: 2056956298}
     - target: {fileID: 8948438348209062869, guid: 90d1b26aee7754949997e8efbee29a5c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: SelectQuestionQuantity

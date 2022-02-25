@@ -146,11 +146,13 @@ namespace Numitor.SDK.DAO
             return default;
         }
 
-        public virtual Task<string> Update(string id, T partialEntity) {
+        public virtual Task<string> Update(string id, T partialEntity)
+        {
             throw new NotSupportedException();
         }
 
-        public virtual Task Delete(string id) {
+        public virtual Task Delete(string id)
+        {
             throw new NotSupportedException();
         }
     }

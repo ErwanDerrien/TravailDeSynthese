@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] Button Button5;
     [SerializeField] Button Button10;
     [SerializeField] Button Button15;
-    
+
     [SerializeField] Button ButtonAnswer0;
     [SerializeField] Button ButtonAnswer1;
     [SerializeField] Button ButtonAnswer2;
@@ -37,6 +37,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         Debug.Log("Bonjour Dana");
+        Debug.Log(AnswerPlaceholder0.text);
     }
 
     void Update()
@@ -49,22 +50,36 @@ public class GameManager : MonoBehaviour
         questionQuantity = quantity;
         SceneManager.LoadScene("QuestionsPage");
 
-        if (questionHttpDao == null)        
+        if (questionHttpDao == null)
             questionHttpDao = new QuestionHttpDao(baseUrl + "/question");
         question = await questionHttpDao.Get();
 
         QuestionPlaceholder.text = question.question;
 
+        
+        
         AnswerPlaceholder0.text = question.answers[0];
-        AnswerPlaceholder1.text = question.answers[1];
+        AnswerPlaceholder0.ForceMeshUpdate(true);
+        AnswerPlaceholder1.text = question.answers[2];
         AnswerPlaceholder2.text = question.answers[2];
         AnswerPlaceholder3.text = question.answers[3];
     }
 
-    public void SelectAnswer(Button button, int index) {
-        Debug.Log("Not implemented yet");
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (scene.name == "QuestionsPage") {
+            AnswerPlaceholder0.text = "-Loading-";
+            AnswerPlaceholder1.text = "-Loading-";
+            AnswerPlaceholder2.text = "-Loading-";
+            AnswerPlaceholder3.text = "-Loading-";
+        }
+        Debug.Log("OnSceneLoaded: " + scene.name);
+        Debug.Log(mode);
     }
 
-
+    public void SelectAnswer(int index)
+    {
+        Debug.Log(index);
+    }
 
 }
