@@ -17,10 +17,10 @@ namespace Numitor.SDK.DAO.AnswerDao
     {
         public AnswerHttpDao(string baseUrl) : base(baseUrl) { }
 
-       
-       public override async Task<Answer> Get(string id)
+        public override async Task<Answer> Get(string id)
         {
-            string url = composeUrl(baseUrl + id, "get");
+
+            string url = baseUrl + "/" + id;
 
             try
             {
@@ -54,9 +54,10 @@ namespace Numitor.SDK.DAO.AnswerDao
 
         public override async Task<string> Create(Answer entity)
         {
-            string url = composeUrl(baseUrl, "post");
+            string url = baseUrl;
 
-            try {
+            try
+            {
                 string payload = JsonUtility.ToJson(entity);
 
                 UTF8Encoding encoder = new UTF8Encoding();
@@ -71,11 +72,13 @@ namespace Numitor.SDK.DAO.AnswerDao
 
                 var operation = request.SendWebRequest();
 
-                while (!operation.isDone) {
+                while (!operation.isDone)
+                {
                     await Task.Yield();
                 }
 
-                if (request.result != UnityWebRequest.Result.Success) {
+                if (request.result != UnityWebRequest.Result.Success)
+                {
                     Debug.LogError($"Failed: {request.error}");
                 }
                 else if (request.responseCode == 201) // OK
@@ -88,7 +91,8 @@ namespace Numitor.SDK.DAO.AnswerDao
                 }
 
             }
-            catch (Exception ex) {
+            catch (Exception ex)
+            {
                 Debug.LogError($"A failed with message: {ex.Message}");
             }
 

@@ -10,12 +10,11 @@ using UnityEngine.SceneManagement;
 using Numitor.SDK.Model.QuestionModel;
 using Numitor.SDK.DAO.QuestionDao;
 
+using Numitor.SDK.Model.AnswerModel;
+using Numitor.SDK.DAO.AnswerDao;
+
 public class GameManager : MonoBehaviour
 {
-
-    [SerializeField] Button Button5;
-    [SerializeField] Button Button10;
-    [SerializeField] Button Button15;
 
     [SerializeField] Button ButtonAnswer0;
     [SerializeField] Button ButtonAnswer1;
@@ -26,29 +25,83 @@ public class GameManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI AnswerPlaceholder1;
     [SerializeField] TextMeshProUGUI AnswerPlaceholder2;
     [SerializeField] TextMeshProUGUI AnswerPlaceholder3;
+    Button[] AnswerButtons;
+    [SerializeField] TextMeshProUGUI PointsPlaceholder;
 
-    int questionQuantity;
 
+
+
+    // HTTP request related variables
     string baseUrl = "https://uhx1g7zs22.execute-api.ca-central-1.amazonaws.com/default/numitor";
     QuestionHttpDao questionHttpDao = null;
+    AnswerHttpDao answerHttpDao = null;
 
-    Question question;
+    // Questions/Answers related variables
+    public static Question question;
+    public static Answer answer;
+    public static int questionQuantity;
+    public static int currentQuestionNumber;
+
+    // Points related variables
+    public static int points;
+
+
+    // Timer related variables
+    public static bool timerIsRunning = false;
+    public static float timeRemaining = 3;
+
+
 
     void Start()
     {
-        Debug.Log("Bonjour Dana");
-        Debug.Log(AnswerPlaceholder0.text);
+        points = 0;
+        AnswerButtons = new Button[4];
+        AnswerButtons[0] = ButtonAnswer0;
+        AnswerButtons[1] = ButtonAnswer1;
+        AnswerButtons[2] = ButtonAnswer2;
+        AnswerButtons[3] = ButtonAnswer3;
     }
 
     void Update()
     {
+        if (timerIsRunning)
+        {
+            Debug.Log("Timer is running");
 
+            if (timeRemaining > 0)
+            {
+                timeRemaining -= Time.deltaTime;
+            }
+            else
+            {
+                timeRemaining = 3;
+                timerIsRunning = false;
+
+                SelectRandomQuestion();
+            }
+        }
     }
 
-    public async void SelectQuestionQuantity(int quantity)
+    public void SelectQuestionQuantity(int quantity)
     {
         questionQuantity = quantity;
-        SceneManager.LoadScene("QuestionsPage");
+        currentQuestionNumber = 1;
+        SelectRandomQuestion();
+    }
+
+    public async void SelectRandomQuestion()
+    {
+
+        Debug.Log("currentQuestionNumber: " + currentQuestionNumber);
+
+        if (currentQuestionNumber == questionQuantity)
+        {
+            showEndScreen();
+            return;
+        }
+
+        currentQuestionNumber += 1;
+
 
         if (questionHttpDao == null)
             questionHttpDao = new QuestionHttpDao(baseUrl + "/question");
@@ -56,30 +109,65 @@ public class GameManager : MonoBehaviour
 
         QuestionPlaceholder.text = question.question;
 
-        
-        
         AnswerPlaceholder0.text = question.answers[0];
-        AnswerPlaceholder0.ForceMeshUpdate(true);
-        AnswerPlaceholder1.text = question.answers[2];
+        AnswerPlaceholder1.text = question.answers[1];
         AnswerPlaceholder2.text = question.answers[2];
         AnswerPlaceholder3.text = question.answers[3];
-    }
 
-    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    {
-        if (scene.name == "QuestionsPage") {
-            AnswerPlaceholder0.text = "-Loading-";
-            AnswerPlaceholder1.text = "-Loading-";
-            AnswerPlaceholder2.text = "-Loading-";
-            AnswerPlaceholder3.text = "-Loading-";
+        for (int i = 0; i < 4; i = i + 1)
+        {
+            ColorBlock colors = AnswerButtons[i].colors;
+            colors.normalColor = Color.blue;
+            AnswerButtons[i].colors = colors;
+            AnswerButtons[i].interactable = true;
         }
-        Debug.Log("OnSceneLoaded: " + scene.name);
-        Debug.Log(mode);
+
+        SceneManager.LoadScene("QuestionsPage");
+
     }
 
-    public void SelectAnswer(int index)
+    public async void SelectAnswer(int index)
     {
-        Debug.Log(index);
+
+        if (answerHttpDao == null)
+            answerHttpDao = new AnswerHttpDao(baseUrl + "/answer");
+        answer = await answerHttpDao.Get(question.id);
+
+        if (answer.index == index)
+        {
+            points += question.points;
+            PointsPlaceholder.text = "Points : " + points;
+
+            ColorBlock colors = AnswerButtons[index].colors;
+            colors.disabledColor = Color.green;
+            AnswerButtons[index].colors = colors;
+        }
+        else
+        {
+            ColorBlock colors = AnswerButtons[index].colors;
+            colors.disabledColor = Color.red;
+            AnswerButtons[index].colors = colors;
+        }
+
+        for (int i = 0; i < 4; i = i + 1)
+        {
+            AnswerButtons[i].interactable = false;
+            if (i == index)
+            {
+                continue;
+            }
+            ColorBlock colors = AnswerButtons[i].colors;
+            colors.disabledColor = Color.grey;
+            AnswerButtons[i].colors = colors;
+        }
+
+        SceneManager.LoadScene("QuestionsPage");
+
+        timerIsRunning = true;
     }
 
+    public void showEndScreen()
+    {
+        Debug.Log("Will be implemented later");
+    }
 }

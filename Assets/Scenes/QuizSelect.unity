@@ -831,6 +831,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7837487333792680281, guid: 2a2b9dbb0d6174cd48f40efc6b189d27, type: 3}
+      propertyPath: AnswerPlaceholders.Array.size
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 8719353099822001157, guid: 2a2b9dbb0d6174cd48f40efc6b189d27, type: 3}
       propertyPath: m_Name
       value: GameManager
