@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/QuestionsPage.unity
     guid: 42ec731cc3d794556b545c5c72776316
+  - enabled: 1
+    path: Assets/Scenes/EndScreen.unity
+    guid: b8d41007119664793a240d8213d88f3a
   m_configObjects: {}

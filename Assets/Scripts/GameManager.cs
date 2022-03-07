@@ -28,9 +28,6 @@ public class GameManager : MonoBehaviour
     Button[] AnswerButtons;
     [SerializeField] TextMeshProUGUI PointsPlaceholder;
 
-
-
-
     // HTTP request related variables
     string baseUrl = "https://uhx1g7zs22.execute-api.ca-central-1.amazonaws.com/default/numitor";
     QuestionHttpDao questionHttpDao = null;
@@ -47,14 +44,13 @@ public class GameManager : MonoBehaviour
 
 
     // Timer related variables
-    public static bool timerIsRunning = false;
-    public static float timeRemaining = 3;
+    public static bool timerIsRunning;
+    public static float timeRemaining;
 
 
 
     void Start()
     {
-        points = 0;
         AnswerButtons = new Button[4];
         AnswerButtons[0] = ButtonAnswer0;
         AnswerButtons[1] = ButtonAnswer1;
@@ -66,8 +62,6 @@ public class GameManager : MonoBehaviour
     {
         if (timerIsRunning)
         {
-            Debug.Log("Timer is running");
-
             if (timeRemaining > 0)
             {
                 timeRemaining -= Time.deltaTime;
@@ -85,7 +79,12 @@ public class GameManager : MonoBehaviour
     public void SelectQuestionQuantity(int quantity)
     {
         questionQuantity = quantity;
+
+        points = 0;
         currentQuestionNumber = 1;
+        timerIsRunning = false;
+        timeRemaining = 3;
+
         SelectRandomQuestion();
     }
 
@@ -94,9 +93,9 @@ public class GameManager : MonoBehaviour
 
         Debug.Log("currentQuestionNumber: " + currentQuestionNumber);
 
-        if (currentQuestionNumber == questionQuantity)
+        if (currentQuestionNumber == questionQuantity + 1)
         {
-            showEndScreen();
+            ShowEndScreen();
             return;
         }
 
@@ -161,13 +160,23 @@ public class GameManager : MonoBehaviour
             AnswerButtons[i].colors = colors;
         }
 
+
         SceneManager.LoadScene("QuestionsPage");
 
         timerIsRunning = true;
     }
 
-    public void showEndScreen()
+    public static void ShowQuestionSelect()
     {
-        Debug.Log("Will be implemented later");
+        SceneManager.LoadScene("QuizSelect");
+    }
+
+    public void ShowEndScreen()
+    {
+        SceneManager.LoadScene("EndScreen");
+    }
+    public void ShowHomeScreen()
+    {
+        SceneManager.LoadScene("Homepage");
     }
 }
