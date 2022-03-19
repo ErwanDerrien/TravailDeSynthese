@@ -20,13 +20,17 @@ public class GameManager : MonoBehaviour
     [SerializeField] Button ButtonAnswer1;
     [SerializeField] Button ButtonAnswer2;
     [SerializeField] Button ButtonAnswer3;
+    Button[] AnswerButtons;
     [SerializeField] TextMeshProUGUI QuestionPlaceholder;
     [SerializeField] TextMeshProUGUI AnswerPlaceholder0;
     [SerializeField] TextMeshProUGUI AnswerPlaceholder1;
     [SerializeField] TextMeshProUGUI AnswerPlaceholder2;
     [SerializeField] TextMeshProUGUI AnswerPlaceholder3;
-    Button[] AnswerButtons;
     [SerializeField] TextMeshProUGUI PointsPlaceholder;
+
+    [SerializeField] TMP_InputField EmailInputField;
+    [SerializeField] TMP_InputField PasswordInputField;
+    [SerializeField] Button LoginButton;
 
     // HTTP request related variables
     string baseUrl = "https://uhx1g7zs22.execute-api.ca-central-1.amazonaws.com/default/numitor";
@@ -179,4 +183,9 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.LoadScene("Homepage");
     }
+
+    public void Login() {
+        Debug.Log("in the login funciton");
+    }
+
 }
