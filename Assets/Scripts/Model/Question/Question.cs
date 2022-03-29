@@ -12,6 +12,12 @@ namespace Numitor.SDK.Model.QuestionModel
         public string[] answers;
         public int points;
 
+        public Question(string id, string question, string[] answers ) {
+            base.id = id;
+            this.question = question;
+            this.answers = answers;
+        }
+
         public string toString()
         {
             return "Question: " + question + "\n" +

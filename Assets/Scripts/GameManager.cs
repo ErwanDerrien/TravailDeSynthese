@@ -13,6 +13,9 @@ using Numitor.SDK.DAO.QuestionDao;
 using Numitor.SDK.Model.AnswerModel;
 using Numitor.SDK.DAO.AnswerDao;
 
+using Numitor.SDK.Model.AuthorModel;
+using Numitor.SDK.DAO.LoginDao;
+
 public class GameManager : MonoBehaviour
 {
 
@@ -28,14 +31,13 @@ public class GameManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI AnswerPlaceholder3;
     [SerializeField] TextMeshProUGUI PointsPlaceholder;
 
-    [SerializeField] TMP_InputField EmailInputField;
-    [SerializeField] TMP_InputField PasswordInputField;
-    [SerializeField] Button LoginButton;
-
+    [SerializeField] InputField EmailInputField;
+    [SerializeField] InputField PasswordInputField;
     // HTTP request related variables
     string baseUrl = "https://uhx1g7zs22.execute-api.ca-central-1.amazonaws.com/default/numitor";
     QuestionHttpDao questionHttpDao = null;
     AnswerHttpDao answerHttpDao = null;
+    LoginHttpDao loginHttpDao = null;
 
     // Questions/Answers related variables
     public static Question question;
@@ -94,9 +96,6 @@ public class GameManager : MonoBehaviour
 
     public async void SelectRandomQuestion()
     {
-
-        Debug.Log("currentQuestionNumber: " + currentQuestionNumber);
-
         if (currentQuestionNumber == questionQuantity + 1)
         {
             ShowEndScreen();
@@ -131,7 +130,6 @@ public class GameManager : MonoBehaviour
 
     public async void SelectAnswer(int index)
     {
-
         if (answerHttpDao == null)
             answerHttpDao = new AnswerHttpDao(baseUrl + "/answer");
         answer = await answerHttpDao.Get(question.id);
@@ -184,8 +182,23 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene("Homepage");
     }
 
-    public void Login() {
-        Debug.Log("in the login funciton");
+    public async void Login()
+    {
+        Author author = new Author(EmailInputField.text, PasswordInputField.text);
+
+        if (loginHttpDao == null)
+            loginHttpDao = new LoginHttpDao(baseUrl + "/login");
+        string response = await loginHttpDao.Get(author);
+
+        if (response != null)
+        {
+            Debug.Log("Success, the redirect will be implemented");
+        }
+        else
+        {
+            Debug.Log("Unsuccessful login, a error message will be implemented");
+        }
+
     }
 
 }

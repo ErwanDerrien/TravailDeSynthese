@@ -17,9 +17,9 @@ namespace Numitor.SDK.DAO.QuestionDao
     {
         public QuestionHttpDao(string baseUrl) : base(baseUrl) { }
 
-        public async Task<Question> Get()
+        public Task<Question> Get()
         {
-            return await Get(null);
+            throw new NotSupportedException();
         }
 
         public override async Task<Question> Get(string id)

@@ -146,6 +146,53 @@ namespace Numitor.SDK.DAO
             return default;
         }
 
+        public async virtual Task<string> Get(T author)
+        {
+            {
+                string url = baseUrl;
+
+                try
+                {
+                    string payload = JsonUtility.ToJson(author);
+
+                    UTF8Encoding encoder = new UTF8Encoding();
+                    byte[] encodedPayload = encoder.GetBytes(payload);
+
+                    UploadHandler uploader = new UploadHandlerRaw(encodedPayload);
+                    uploader.contentType = "application/json";
+
+                    UnityWebRequest request = new UnityWebRequest(url, "GET");
+                    request.uploadHandler = uploader;
+                    request.downloadHandler = new DownloadHandlerBuffer();
+
+                    var operation = request.SendWebRequest();
+
+                    while (!operation.isDone)
+                    {
+                        await Task.Yield();
+                    }
+
+                    if (request.result != UnityWebRequest.Result.Success)
+                    {
+                        Debug.LogError($"Failed: {request.error}");
+                    }
+                    else if (request.responseCode == 200) // OK
+                    {
+                        var jsonPayload = request.downloadHandler.text;
+
+                        return jsonPayload;
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    Debug.LogError($"A failed with message: {ex.Message}");
+                }
+
+                return default;
+            }
+        }
+
         public virtual Task<string> Update(string id, T partialEntity)
         {
             throw new NotSupportedException();
