@@ -22,7 +22,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] Button ButtonAnswer0;
     [SerializeField] Button ButtonAnswer1;
     [SerializeField] Button ButtonAnswer2;
-    [SerializeField] Button ButtonAnswer3;
     Button[] AnswerButtons;
     [SerializeField] TextMeshProUGUI QuestionPlaceholder;
     [SerializeField] TextMeshProUGUI AnswerPlaceholder0;
@@ -34,6 +33,18 @@ public class GameManager : MonoBehaviour
     [SerializeField] InputField EmailInputField;
     [SerializeField] InputField PasswordInputField;
     [SerializeField] TextMeshProUGUI LoginFeedback;
+    [SerializeField] Button SubmissionButton;
+    [SerializeField] TextMeshProUGUI SubmissionFeedback;
+    [SerializeField] InputField QuestionInputField;
+    [SerializeField] InputField Answer1InputField;
+    [SerializeField] InputField Answer2InputField;
+    [SerializeField] InputField Answer3InputField;
+    [SerializeField] InputField Answer4InputField;
+    [SerializeField] Toggle Toggle1;
+    [SerializeField] Toggle Toggle2;
+    [SerializeField] Toggle Toggle3;
+    [SerializeField] Toggle Toggle4;
+
     // HTTP request related variables
     string baseUrl = "https://uhx1g7zs22.execute-api.ca-central-1.amazonaws.com/default/numitor";
     QuestionHttpDao questionHttpDao = null;
