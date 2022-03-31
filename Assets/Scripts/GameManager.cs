@@ -33,6 +33,7 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] InputField EmailInputField;
     [SerializeField] InputField PasswordInputField;
+    [SerializeField] TextMeshProUGUI LoginFeedback;
     // HTTP request related variables
     string baseUrl = "https://uhx1g7zs22.execute-api.ca-central-1.amazonaws.com/default/numitor";
     QuestionHttpDao questionHttpDao = null;
@@ -184,7 +185,16 @@ public class GameManager : MonoBehaviour
 
     public async void Login()
     {
-        Author author = new Author(EmailInputField.text, PasswordInputField.text);
+        string email = EmailInputField.text;
+        string password = PasswordInputField.text;
+
+        if (email == "" || password == "")
+        {
+            LoginFeedback.text = "Veuillez remplir les champs avant de les soumettre";
+            return;
+        }
+        
+        Author author = new Author(email, password);
 
         if (loginHttpDao == null)
             loginHttpDao = new LoginHttpDao(baseUrl + "/login");
@@ -196,7 +206,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            Debug.Log("Unsuccessful login, a error message will be implemented");
+            LoginFeedback.text = "Aucun compte ne correspond aux coordonnées";
         }
 
     }
