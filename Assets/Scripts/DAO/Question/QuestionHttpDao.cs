@@ -62,7 +62,7 @@ namespace Numitor.SDK.DAO.QuestionDao
 
             try
             {
-                string payload = JsonUtility.ToJson(entity);
+                var payload = JsonUtility.ToJson(entity);
 
                 UTF8Encoding encoder = new UTF8Encoding();
                 byte[] encodedPayload = encoder.GetBytes(payload);
@@ -87,17 +87,13 @@ namespace Numitor.SDK.DAO.QuestionDao
                 }
                 else if (request.responseCode == 201)
                 {
-                    string jsonPayload = request.downloadHandler.text;
-
-                    Question output = JsonUtility.FromJson<Question>(jsonPayload);
-
-                    return output.id;
+                    return request.downloadHandler.text;
                 }
 
             }
             catch (Exception ex)
             {
-                Debug.LogError($"A failed with message: {ex.Message}");
+                Debug.LogError($"Failed with message: {ex.Message}");
             }
 
             return default;

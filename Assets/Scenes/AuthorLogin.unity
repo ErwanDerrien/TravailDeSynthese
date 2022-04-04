@@ -314,7 +314,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Addresse courriel :'
+  m_text: 'Courriel :'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 614a925e29d1149d2a73b0b48da1e763, type: 2}
   m_sharedMaterial: {fileID: -8816903732749787566, guid: 614a925e29d1149d2a73b0b48da1e763, type: 2}
@@ -1604,7 +1604,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Connection
+  m_text: Connexion
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 614a925e29d1149d2a73b0b48da1e763, type: 2}
   m_sharedMaterial: {fileID: -8816903732749787566, guid: 614a925e29d1149d2a73b0b48da1e763, type: 2}

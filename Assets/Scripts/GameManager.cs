@@ -1,3 +1,5 @@
+
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -22,6 +24,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] Button ButtonAnswer0;
     [SerializeField] Button ButtonAnswer1;
     [SerializeField] Button ButtonAnswer2;
+    [SerializeField] Button ButtonAnswer3;
     Button[] AnswerButtons;
     [SerializeField] TextMeshProUGUI QuestionPlaceholder;
     [SerializeField] TextMeshProUGUI AnswerPlaceholder0;
@@ -36,6 +39,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] Button SubmissionButton;
     [SerializeField] TextMeshProUGUI SubmissionFeedback;
     [SerializeField] InputField QuestionInputField;
+    [SerializeField] InputField PointsInputField;
     [SerializeField] InputField Answer1InputField;
     [SerializeField] InputField Answer2InputField;
     [SerializeField] InputField Answer3InputField;
@@ -44,6 +48,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] Toggle Toggle2;
     [SerializeField] Toggle Toggle3;
     [SerializeField] Toggle Toggle4;
+
 
     // HTTP request related variables
     string baseUrl = "https://uhx1g7zs22.execute-api.ca-central-1.amazonaws.com/default/numitor";
@@ -148,7 +153,7 @@ public class GameManager : MonoBehaviour
 
         if (answer.index == index)
         {
-            points += question.points;
+            points += Int32.Parse(question.points);
             PointsPlaceholder.text = "Points : " + points;
 
             ColorBlock colors = AnswerButtons[index].colors;
@@ -204,7 +209,7 @@ public class GameManager : MonoBehaviour
             LoginFeedback.text = "Veuillez remplir les champs avant de les soumettre";
             return;
         }
-        
+
         Author author = new Author(email, password);
 
         if (loginHttpDao == null)
@@ -220,6 +225,37 @@ public class GameManager : MonoBehaviour
             LoginFeedback.text = "Aucun compte ne correspond aux coordonnées";
         }
 
+    }
+    public async void SubmitQuestion()
+    {
+
+        string questionText = QuestionInputField.text;
+        string pointsText = PointsInputField.text;
+        string answerText0 = Answer1InputField.text;
+        string answerText1 = Answer2InputField.text;
+        string answerText2 = Answer3InputField.text;
+        string answerText3 = Answer4InputField.text;
+
+        Guid uuid = Guid.NewGuid();
+
+        string[] answers = new string[4];
+        answers[0] = answerText0;
+        answers[1] = answerText1;
+        answers[2] = answerText2;
+        answers[3] = answerText3;
+
+        Question questionToSubmit = new Question(uuid.ToString(), questionText, answers, pointsText);
+        Debug.Log(questionToSubmit.toString());
+        if (questionHttpDao == null)
+            questionHttpDao = new QuestionHttpDao(baseUrl + "/question");
+        string test = await questionHttpDao.Create(questionToSubmit);
+
+        Debug.Log(test);
+
+        bool toggle0 = Toggle1.isOn;
+
+        bool toggle2 = Toggle3.isOn;
+        bool toggle3 = Toggle4.isOn;
     }
 
 }
