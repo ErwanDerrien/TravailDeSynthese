@@ -83,11 +83,7 @@ namespace Numitor.SDK.DAO.AnswerDao
                 }
                 else if (request.responseCode == 201) // OK
                 {
-                    string jsonPayload = request.downloadHandler.text;
-
-                    Answer output = JsonUtility.FromJson<Answer>(jsonPayload);
-
-                    return output.id;
+                    return request.downloadHandler.text;
                 }
 
             }

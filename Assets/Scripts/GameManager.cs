@@ -26,6 +26,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] Button ButtonAnswer2;
     [SerializeField] Button ButtonAnswer3;
     Button[] AnswerButtons;
+
     [SerializeField] TextMeshProUGUI QuestionPlaceholder;
     [SerializeField] TextMeshProUGUI AnswerPlaceholder0;
     [SerializeField] TextMeshProUGUI AnswerPlaceholder1;
@@ -48,6 +49,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] Toggle Toggle2;
     [SerializeField] Toggle Toggle3;
     [SerializeField] Toggle Toggle4;
+
 
 
     // HTTP request related variables
@@ -228,6 +230,7 @@ public class GameManager : MonoBehaviour
     }
     public async void SubmitQuestion()
     {
+        SubmissionFeedback.text = " En cours d'envoi...";
 
         string questionText = QuestionInputField.text;
         string pointsText = PointsInputField.text;
@@ -236,7 +239,36 @@ public class GameManager : MonoBehaviour
         string answerText2 = Answer3InputField.text;
         string answerText3 = Answer4InputField.text;
 
+        // Answer submission preparation
+        bool toggle0 = Toggle1.isOn;
+        bool toggle1 = Toggle2.isOn;
+        bool toggle2 = Toggle3.isOn;
+        bool toggle3 = Toggle4.isOn;
+
+        bool[] toggles = new bool[4];
+        toggles[0] = toggle0;
+        toggles[1] = toggle1;
+        toggles[2] = toggle2;
+        toggles[3] = toggle3;
+
+        int answerIndex = -1;
+
+        for (int i = 0; i < 4; i++)
+        {
+            if (toggles[i])
+            {
+                if (answerIndex != -1)
+                {
+                    SubmissionFeedback.text = "Please only select one checkbox fo the correct answer";
+                    return;
+                }
+                answerIndex = i;
+            }
+        }
+
         Guid uuid = Guid.NewGuid();
+
+        // Question submission
 
         string[] answers = new string[4];
         answers[0] = answerText0;
@@ -245,17 +277,38 @@ public class GameManager : MonoBehaviour
         answers[3] = answerText3;
 
         Question questionToSubmit = new Question(uuid.ToString(), questionText, answers, pointsText);
-        Debug.Log(questionToSubmit.toString());
         if (questionHttpDao == null)
             questionHttpDao = new QuestionHttpDao(baseUrl + "/question");
-        string test = await questionHttpDao.Create(questionToSubmit);
+        string questionResponse = await questionHttpDao.Create(questionToSubmit);
 
-        Debug.Log(test);
+        if (questionResponse != null)
+        {
+            SubmissionFeedback.text = "Succès, la question a bien été soumise";
+        }
+        else
+        {
+            SubmissionFeedback.text = "Une erreur innatendu est survenue durant la soumission de la question...";
+            return;
+        }
 
-        bool toggle0 = Toggle1.isOn;
+        // Answer submission
+        Answer answerToSubmit = new Answer(questionResponse, answerIndex);
 
-        bool toggle2 = Toggle3.isOn;
-        bool toggle3 = Toggle4.isOn;
+        if (answerHttpDao == null)
+            answerHttpDao = new AnswerHttpDao(baseUrl + "/answer");
+        string answerResponse = await answerHttpDao.Create(answerToSubmit);
+
+        if (questionResponse != null)
+        {
+            SubmissionFeedback.text = "Succès, la question a bien été soumise";
+        }
+        else
+        {
+            SubmissionFeedback.text = "Une erreur innatendu est survenue durant la soumission de la réponse...";
+            return;
+        }
+
+        Debug.Log("answerResponse: " + answerResponse);
     }
 
 }
