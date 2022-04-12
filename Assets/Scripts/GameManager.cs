@@ -151,7 +151,11 @@ public class GameManager : MonoBehaviour
     {
         if (answerHttpDao == null)
             answerHttpDao = new AnswerHttpDao(baseUrl + "/answer");
-        answer = await answerHttpDao.Get(question.id);
+        answer = null;
+        var task = answerHttpDao.Get(question.id).Wait();
+        answer = task.Result;
+
+        Debug.Log("bhay: " + answer);
 
         if (answer.index == index)
         {
@@ -201,6 +205,11 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene("Homepage");
     }
 
+
+    public void ShowAuthorLogin() {
+        SceneManager.LoadScene("AuthorLogin");
+    }
+
     public async void Login()
     {
         string email = EmailInputField.text;
@@ -220,7 +229,8 @@ public class GameManager : MonoBehaviour
 
         if (response != null)
         {
-            Debug.Log("Success, the redirect will be implemented");
+            Debug.Log("Success, redirect incoming...");
+            SceneManager.LoadScene("AddQuestion");
         }
         else
         {

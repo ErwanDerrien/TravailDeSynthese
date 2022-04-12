@@ -68,6 +68,39 @@ namespace Numitor.SDK.DAO
         }
 
 
+        public virtual async Task<T> Get()
+        {
+            string url = composeUrl(baseUrl, "/next");
+
+            try
+            {
+                using var request = UnityWebRequest.Get(url);
+
+                var operation = request.SendWebRequest();
+
+                while (!operation.isDone)
+                {
+                    await Task.Yield();
+                }
+
+                if (request.result != UnityWebRequest.Result.Success)
+                {
+                    Debug.LogError($"Failed: {request.error}");
+                }
+                else if (request.responseCode == 200)
+                {
+                    var jsonPayload = request.downloadHandler.text;
+
+                    return JsonUtility.FromJson<T>(jsonPayload);
+                }
+            }
+            catch (System.Exception ex)
+            {
+                Debug.LogError($"{nameof(Get)} for {entityName} failed with message: {ex.Message}");
+            }
+
+            return default;
+        }
         public virtual async Task<T> Get(string id)
         {
             string url = composeUrl(baseUrl, "get");
