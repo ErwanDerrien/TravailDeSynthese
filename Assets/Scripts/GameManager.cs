@@ -51,7 +51,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] Toggle Toggle4;
 
 
-
     // HTTP request related variables
     string baseUrl = "https://uhx1g7zs22.execute-api.ca-central-1.amazonaws.com/default/numitor";
     QuestionHttpDao questionHttpDao = null;
@@ -67,11 +66,9 @@ public class GameManager : MonoBehaviour
     // Points related variables
     public static int points;
 
-
     // Timer related variables
     public static bool timerIsRunning;
     public static float timeRemaining;
-
 
 
     void Start()
@@ -151,11 +148,7 @@ public class GameManager : MonoBehaviour
     {
         if (answerHttpDao == null)
             answerHttpDao = new AnswerHttpDao(baseUrl + "/answer");
-        answer = null;
-        var task = answerHttpDao.Get(question.id).Wait();
-        answer = task.Result;
-
-        Debug.Log("bhay: " + answer);
+        answer = await answerHttpDao.Get(question.id);
 
         if (answer.index == index)
         {
@@ -206,7 +199,8 @@ public class GameManager : MonoBehaviour
     }
 
 
-    public void ShowAuthorLogin() {
+    public void ShowAuthorLogin()
+    {
         SceneManager.LoadScene("AuthorLogin");
     }
 
